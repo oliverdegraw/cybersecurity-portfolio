@@ -1,6 +1,6 @@
 # 🛡️ Oliver Degraw — Cybersecurity Portfolio
 
-**TS/SCI Cleared | CISSP | USAF 1D771 Cyber Defense Operator → Civilian IR Professional**
+**TS/SCI Cleared | CISSP | USAF 1D775 Cybersecurity Crafstman → Civilian IR Professional**
 
 📍 Tucson, AZ | 📧 oliverdegraw@gmail.com | 🔗 [LinkedIn](https://www.linkedin.com/in/oliver-degraw-387312137/) |📓 [Full Portfolio (Notion)](https://www.notion.so/Cybersecurity-Portfolio-5db1ee66bfd3481bbb33fa97cbbbb19d)
 
@@ -8,7 +8,7 @@
 
 ## About This Repository
 
-I'm a U.S. Air Force Staff Sergeant (E-5) and 7-level 1D771 Cyber Defense Operations Craftsman separating in January 2027 after 6 years of hands-on cybersecurity work in classified DoD environments. This repository documents my transition from military cyber operations into civilian incident response — tracking labs, investigations, automation scripts, and technical writeups as I build toward a senior IR analyst role in the commercial sector.
+I'm a U.S. Air Force Staff Sergeant (E-5) and 7-level 1D775 Cybersecurity Craftsman separating in January 2027 after 6 years of hands-on cybersecurity work in classified DoD environments. This repository documents my transition from military cyber operations into civilian incident response — tracking labs, investigations, automation scripts, and technical writeups as I build toward a senior IR analyst role in the commercial sector.
 
 Everything here is work-in-progress and actively updated. The goal isn't a polished showcase — it's an honest record of skills being built in real time.
 
