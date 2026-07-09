@@ -1,123 +1,102 @@
-# 🛡️ Oliver Degraw — Cybersecurity Portfolio
+# 🛡️ Oliver Degraw — Security Architecture Portfolio
 
-**TS/SCI Cleared | CISSP | USAF 1D775 Cybersecurity Craftsman → Civilian IR Professional**
+**TS/SCI Cleared | CISSP | M.S. Cybersecurity | USAF Cybersecurity Craftsman & Installation ISSM**
 
-📍 Tucson, AZ | 📧 oliverdegraw@gmail.com | 🔗 [LinkedIn](https://www.linkedin.com/in/oliver-degraw-387312137/) | 📓 [Full Portfolio (Notion)](https://www.notion.so/Cybersecurity-Portfolio-5db1ee66bfd3481bbb33fa97cbbbb19d)
-
----
-
-## About This Repository
-
-I'm a U.S. Air Force Staff Sergeant (E-5) and 7-level 1D775 Cybersecurity Craftsman separating in January 2027 after 5+ years of hands-on cybersecurity work in classified DoD environments. This repository documents my transition from military cyber operations into civilian incident response — tracking investigations, automation scripts, labs, and technical writeups as I build toward a senior IR analyst role in the commercial sector.
-
-Everything here is work-in-progress and actively updated. The goal isn't a polished showcase — it's an honest record of skills being built and applied in real time.
+📍 Tucson, AZ · 📧 oliverdegraw@gmail.com · 🔗 [LinkedIn](https://www.linkedin.com/in/oliver-degraw-387312137/)
 
 ---
 
-## What I'm Building Toward
+## About
 
-**Target Role:** Cybersecurity Analyst / Incident Responder (Enterprise/Cloud IR)  
-**Target Timeline:** Civilian role by Q1 2027  
-**Key Focus Areas:** Incident response, threat hunting, cloud IR (AWS/Azure), digital forensics, security automation, AI-integrated workflows
+I design, authorize, and defend security programs. For 5+ years as a U.S. Air Force Cybersecurity Craftsman and Installation ISSM, that has meant translating DoD, NIST, and DISA requirements into system-specific control architectures — directing RMF/ATO lifecycles, conducting architectural security reviews of every proposed system and network change, and advising leadership on security-by-design.
+
+Separating January 2027. This repository documents the work: architecture artifacts, threat models, investigations, and the technical depth an architect has to design for.
+
+**Trajectory:** Security Engineer / Senior GRC Analyst → **Security Architect**
 
 ---
 
-## Current Progress
+## 🏗️ Architecture
 
-### 🎓 Education
-| Program | Institution | Status |
-|---|---|---|
-| M.S. Cybersecurity & Information Assurance | Western Governors University | Starting June 2026 |
-| B.S. Cybersecurity & Information Assurance | Western Governors University | Completed March 2025 |
+### Zero Trust Architecture — Logical Reference Design
+**Status: ✅ Complete** · Graduate capstone, M.S. Cybersecurity (July 2026)
 
-### 📜 Certifications
-| Certification | Status |
-|---|---|
-| CISSP | ✅ Active |
-| CASP+ | ✅ Active |
-| CySA+ | ✅ Active |
-| PenTest+ | ✅ Active |
-| SSCP / Security+ / Network+ / A+ / ITIL 4 | ✅ Active |
-| AWS Certified Security – Specialty | 🔄 In Progress |
-| Microsoft AZ-500 | 🔜 Planned |
-| GCFA + GCIH + GEIR + GCFE (SANS IR Certificate) | 🔜 GI Bill post-separation |
+Target-state Zero Trust reference architecture and phased adoption roadmap for a mid-sized enterprise. Maps policy decision and enforcement components to **NIST SP 800-207** (PE / PA / PEP) and structures the design across all five **CISA ZTMM v2.0** pillars — Identity, Devices, Networks, Applications & Workloads, Data — plus Visibility & Analytics, Automation & Orchestration, and Governance.
 
-### 🔬 Hands-On Labs & Training
-| Platform | Path / Project | Status |
-|---|---|---|
-| HackTheBox Academy | SOC Analyst Job Role Path | 🔄 3/15 modules complete |
-| HackTheBox | Sherlocks (DFIR Investigations) | 🔜 Starting soon |
-| AWS Free Tier | Cloud IR Lab (GuardDuty, CloudTrail, IAM) | 🔜 In Progress |
+Addresses a documented phishing-to-lateral-movement scenario by replacing implicit perimeter trust with continuous, identity-centric verification: phishing-resistant MFA and conditional access, device posture at time of access, network microsegmentation, application-layer access brokering, and data classification with policy-based protection.
+
+Delivered as a maturity-driven, phased roadmap rather than an all-or-nothing rebuild — allowing leadership to prioritize investment against risk while maintaining operations.
+
+`NIST SP 800-207` · `CISA ZTMM v2.0` · `OMB M-22-09`
+
+---
+
+### Cloud Security Reference Architecture
+**Status: 🔄 In progress**
+
+An AWS reference architecture built to demonstrate identity-centric access control, network segmentation, data protection, and security telemetry — then threat-modeled against its own design.
+
+Scoped deliberately small: every component must justify its presence by mapping to a control objective. Design principles carried forward from the Zero Trust work — no implicit trust, least privilege by default, no long-lived credentials, everything logged, assume breach.
+
+**Deliverables:** scope document · logical architecture diagram · control mapping (implemented control → NIST SP 800-53 → ZTMM pillar) · STRIDE threat model with MITRE ATT&CK (Cloud/IaaS) mapping · design decisions and residual risk writeup
+
+`AWS` · `NIST SP 800-53` · `AWS Well-Architected: Security Pillar` · `STRIDE` · `MITRE ATT&CK`
 
 ---
 
 ## 🔍 Investigations
 
-### IR-001 — Unauthorized Bluetooth Device | Enterprise Workstation Forensic Investigation
-**Date:** May 2026 | **Status:** ✅ Closed
+### IR-001 — Unauthorized Bluetooth Device, Enterprise Workstation
+**Status: ✅ Closed** · Real enterprise forensic investigation
 
-Real enterprise forensic investigation conducted as ISSO. Registry analysis confirmed unauthorized Bluetooth device pairing, Domain Controller coordination identified responsible user, systemic GPO security control gap identified across workstation population.
+Conducted as ISSO on a classified enterprise network. Windows registry analysis (`BTHPORT`, `bthserv`), event log examination (Event IDs 4624, 4672, 440), FILETIME timestamp conversion, and multi-source artifact corroboration to establish root cause.
 
-**Tools:** Windows Registry Editor, PowerShell (Get-PnpDevice, FILETIME conversion), Windows Event Viewer (Event IDs 4624, 4672, 440), Kernel-PnP logs, setupapi.dev.log
+**The architecture finding:** the investigation surfaced that the sole Bluetooth-disable control was a manual BIOS step with no GPO enforcement — a systemic control gap across the entire workstation population, not a single-host incident. Escalated with tiered remediation recommendations adopted at installation level.
 
-**MITRE ATT&CK:** T1200 (Hardware Additions) | T1052 (Exfiltration Over Physical Medium) | T1562.001 (Impair Defenses)
+**MITRE ATT&CK:** `T1200` Hardware Additions · `T1052` Exfiltration Over Physical Medium · `T1562.001` Impair Defenses
 
-**Key Finding:** Sole Bluetooth disable control was a manual BIOS step with no GPO enforcement — systemic gap identified and escalated for enterprise remediation across full workstation population.
+📄 [`investigations/IR-001/`](investigations/IR-001/)
 
-📄 Full report: [`investigations/IR-001/`](investigations/IR-001/)
-
----
-
-## 🐍 Scripts
-
-### ad-ir-lockdown.ps1 — Active Directory IR Automation
-**Language:** PowerShell | **Status:** ✅ Deployed in live environment
-
-Queries Active Directory for specified user accounts and initiates automated lockdown procedures during active security incidents. Developed and deployed for real enterprise IR workflows to accelerate containment response time.
-
-📁 [`scripts/ad-ir-lockdown.ps1`](scripts/)
-
-### ioc-enricher.py — IOC Enrichment Tool *(in development)*
-**Language:** Python | Queries VirusTotal API to enrich IPs, hashes, and domains from log files
-
-### cloudtrail-parser.py — CloudTrail Log Analyzer *(in development)*
-**Language:** Python | Parses AWS CloudTrail JSON logs and flags suspicious API call patterns
-
-*Scripts added as built. No placeholder code — only working tools.*
+> *One missed manual step revealed a missing enforcement layer enterprise-wide. Moving from the single event to the systemic fix is the reflex this portfolio is built around.*
 
 ---
 
-## 🏠 Home Lab
+## 🔬 Labs & Ongoing Work
 
-### AWS Cloud IR Lab *(in progress)*
-- **Tools:** GuardDuty, CloudTrail, S3, IAM
-- **Objective:** Deploy cloud monitoring environment, introduce intentional misconfigurations, detect and respond, document as formal IR writeup
-- **Status:** Account provisioned, building in parallel with AWS Security Specialty cert prep
+| Focus | Detail | Status |
+|---|---|---|
+| **AWS cloud security lab** | Deployed environment feeding the reference architecture above | 🔄 Active |
+| **HackTheBox — SOC Analyst path** | SIEM (Elastic/KQL), threat hunting, Windows internals, detection | 🔄 4/15 |
+| **AI-integrated security workflows** | Claude and Codex applied to log triage, ATT&CK mapping, detection development | 🔄 Ongoing |
 
 ---
 
-## Military Experience → Civilian Translation
+## 📜 Credentials
 
-5+ years of DoD cyber operations that directly map to enterprise IR:
+**Active:** CISSP · CASP+ · CySA+ · PenTest+ · SSCP · Security+ · Network+ · A+ · ITIL 4
 
-| Military Work | Civilian Equivalent |
+**Education:** M.S. Cybersecurity & Information Assurance, WGU (July 2026) · B.S. Cybersecurity & Information Assurance, WGU (March 2025)
+
+**In progress:** CISM · AWS Certified Security – Specialty
+
+**Roadmap:** CCSP → AWS Solutions Architect – Associate → CSA CCZT → SANS GDSA + GMON (GI Bill) → CISSP-ISSAP (2027)
+
+---
+
+## Military Experience → Architecture
+
+| The work | The architecture equivalent |
 |---|---|
-| ISSO/ISSM — security authorization lifecycle | Security compliance, control implementation, continuous monitoring |
-| Incident response for security events on enterprise networks | Enterprise IR — detection, triage, containment, eradication, recovery |
-| Registry forensics, event log analysis, artifact collection | Digital forensics and evidence handling |
-| Vulnerability assessments on classified systems | Vulnerability management and attack surface analysis |
-| PowerShell automation for IR workflows | Security orchestration and automation |
-| 24/7 network operations under adversarial conditions | High-stakes IR under time-critical, real-world conditions |
-| Forward deployment at Al Udeid AB during active conflict | Mission-critical security under operational pressure |
+| RMF control selection & implementation design | Translating requirements into control architectures |
+| Security impact analysis on all system/network changes | Architectural security review |
+| Advising commanders on security for new systems and construction | Security-by-design advisory |
+| Access Control Plan authorship + PKI/MFA/privileged access | IAM policy architecture |
+| Boundary protection, segmentation, device compliance | Zero Trust pillar implementation |
+| TEMPEST assessment & facility accreditation | Emissions security architecture |
+| Complete ATO documentation suite | Enterprise security program design |
 
 ---
 
-## Contact
+📧 oliverdegraw@gmail.com · 🔗 [LinkedIn](https://www.linkedin.com/in/oliver-degraw-387312137/)
 
-📧 oliverdegraw@gmail.com  
-🔗 [LinkedIn](https://www.linkedin.com/in/oliver-degraw-387312137/)  
-📓 [Notion Portfolio](https://www.notion.so/Cybersecurity-Portfolio-5db1ee66bfd3481bbb33fa97cbbbb19d)
-
----
-
-*Actively updated as I build. Last updated: May 2026*
+*Actively maintained.*
